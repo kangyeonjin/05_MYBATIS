@@ -1,5 +1,7 @@
 package com.ohgiraffers.section01.xmlconfig;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -7,13 +9,13 @@ public class Application {
     public static void main(String[] args) {
 
         /*
-        * 시스템요구사항
-        * 1. 메뉴 전체조회
-        * 2. 메뉴 코드로 메뉴조회
-        * 3. 신규 메뉴 추가
-        * 4. 메뉴 수정
-        * 5. 메뉴 삭제
-        * */
+         * 시스템요구사항
+         * 1. 메뉴 전체조회
+         * 2. 메뉴 코드로 메뉴조회
+         * 3. 신규 메뉴 추가
+         * 4. 메뉴 수정
+         * 5. 메뉴 삭제
+         * */
 
         Scanner sc = new Scanner(System.in);
         MenuController menuController = new MenuController();
@@ -29,15 +31,35 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no) {
-                case 1: menuController.selectAllMenu(); break;
-                case 2: break;
-                case 3: break;
-                case 4: break;
-                case 5: break;
+                case 1:
+                    menuController.selectAllMenu();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
                 default:
                     System.out.println("잘못된 메뉴를 선택하셨습니다.");
                     break;
             }
         } while (true);
+    }
+        // 메뉴코드를 입력받는 메서드
+        private static Map<String, String> inputMenuCode() {
+
+            Scanner sc = new Scanner(System.in);
+            System.out.print("메뉴 코드를 입력하세요 : ");
+            String code = sc.nextLine();
+
+            Map<String, String> parameter = new HashMap<>();
+            parameter.put("code", code);
+
+            return parameter;
+
+
     }
 }
