@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="section01.Mapper">
+    <resultMap id="employResultMap" type="section01.EmployeeDTO">
+        <id property="empid" column="emp_id"/>
+        <result property="empname" column="emp_name"/>
+        <result property="empno" column="emp_no"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="deptcode" column="dept_code"/>
+        <result property="jobcode" column="job_code"/>
+        <result property="sallevel" column="sal_level"/>
+        <result property="salary" column="salary"/>
+        <result property="bonus" column="bonus"/>
+        <result property="managerid" column="manager_id"/>
+        <result property="hiredate" column="hire_date"/>
+        <result property="entdate" column="ent_date"/>
+        <result property="entyn" column="ent_yn"/>
+    </resultMap>
+    <select id="Allemployee" resultType="employResultMap">
+        select
+        emp_id,
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_code,
+        job_code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_date,
+        ent_date,
+        ent_yn
+        from
+        employee
+
+    </select>
+
+</mapper>

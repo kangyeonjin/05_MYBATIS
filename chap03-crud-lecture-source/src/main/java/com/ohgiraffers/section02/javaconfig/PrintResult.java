@@ -1,6 +1,5 @@
 package com.ohgiraffers.section02.javaconfig;
 
-
 import java.util.List;
 
 public class PrintResult {

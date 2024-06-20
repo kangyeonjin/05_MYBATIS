@@ -1,19 +1,17 @@
-package com.ohgiraffers.section03.remix;
-
+package section01;
 
 import java.util.List;
 
 public class PrintResult {
 
-    public void printMenuList(List<MenuDTO> menuList) {
+    public void printEmployList(List<EmployeeDTO> employList) {
 
-        for(MenuDTO menu : menuList) {
-            System.out.println(menu);
+        for(EmployeeDTO employ : employList) {
+            System.out.println(employ);
         }
     }
-
-    public void printMenu(MenuDTO menu) {
-        System.out.println(menu);
+    public void printEmployee(EmployeeDTO employ) {
+        System.out.println(employ);
     }
 
 
@@ -42,5 +40,6 @@ public class PrintResult {
 
         System.out.println(errorMessage);
     }
+
 
 }
