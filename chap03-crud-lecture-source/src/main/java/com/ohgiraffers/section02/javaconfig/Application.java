@@ -1,10 +1,19 @@
-package com.ohgiraffers.section01.xmlconfig;
+package com.ohgiraffers.section02.javaconfig;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
+
+    /*
+     * 시스템 요구사항
+     * 1. 메뉴 전체조회
+     * 2. 메뉴 코드로 메뉴 조회
+     * 3. 신규 메뉴 추가
+     * 4. 메뉴 수정
+     * 5. 메뉴 삭제
+     */
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,6 +35,7 @@ public class Application {
                 case 3: menuController.registMenu(inputMenu()); break;
                 case 4: menuController.modifyMenu(inputModifyMenu()); break;
                 case 5: menuController.deleteMenu(inputMenuCode()); break;
+                case 6: return;
                 default:
                     System.out.println("잘못된 메뉴를 선택하셨습니다.");
                     break;
@@ -40,10 +50,8 @@ public class Application {
         System.out.print("메뉴 코드를 입력하세요 : ");
         String code = sc.nextLine();
 
-        //map 키와 값을 쌍으로 저장하는 자료구조임
-        //hashmap 은 map인터페이스를 구현한 클래스
-        Map<String, String> parameter = new HashMap<>(); //객체 생설할때 타입 파라미터는 생략할수있음
-        parameter.put("code", code); //paramener라는 hashmap객체에 code라는 키와 code라는 값을 추가함
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("code", code);
 
         return parameter;
     }

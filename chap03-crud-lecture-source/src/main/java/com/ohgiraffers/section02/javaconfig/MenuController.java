@@ -1,59 +1,49 @@
-package com.ohgiraffers.section01.xmlconfig;
+package com.ohgiraffers.section02.javaconfig;
 
 import java.util.List;
 import java.util.Map;
 
+import static java.awt.SystemColor.menu;
+
 public class MenuController {
 
-    /*
-     * controller
-     * 뷰와 모델사이의 전달자역할
-     * 모델에게 명령을 전달해주는 역할로, 모델의상태를 변경할수있다
-     * 뷰에 명령을 보냄으로서 모델의 표시방법을 바꿀수있다
-     *
-     * service 알고있어야한다
-     * */
-    private final MenuService menuService;
     private final PrintResult printResult;
+    private final MenuService menuService;
 
     // 생성자 주입
     public MenuController() {
-        menuService = new MenuService();
         printResult = new PrintResult();
+        menuService = new MenuService();
     }
 
+    // 전체조회
     public void selectAllMenu() {
 
         List<MenuDTO> menuList = menuService.selectAllMenu();
 
-        //view로 전달
-        if (menuList != null) {
+        if(menuList != null) {
             printResult.printMenuList(menuList);
-
         } else {
             printResult.printErrorMessage("selectList");
         }
 
     }
 
-    public void selectMenuByCode(Map<String, String> parameter) {
-
-        int code = Integer.parseInt(parameter.get("code"));
-
-        // service로 보내기
+// 메뉴 코드로 단건조회
+    public void selectMenuByCode(Map<String, String> prameter) {
+        int code = Integer.parseInt(prameter.get("code"));
         MenuDTO menu = menuService.selectMenuByCode(code);
-
-        // view로 전달
-        if (menu != null) {
+        if(menu != null){
             printResult.printMenu(menu);
-        } else {
+        }else {
             printResult.printErrorMessage("selectOne");
         }
     }
 
+// 신규메뉴등록
     public void registMenu(Map<String, String> parameter) {
-
         String name = parameter.get("name");
+
         int price = Integer.parseInt(parameter.get("price"));
         int categoryCode = Integer.parseInt(parameter.get("categoryCode"));
 
@@ -62,17 +52,15 @@ public class MenuController {
         menu.setPrice(price);
         menu.setCategoryCode(categoryCode);
 
-        boolean result = menuService.registMenu(menu);
-
-        // view로 전달
-        if (result) {
+        if(menuService.registMenu(menu)){
             printResult.printSuccessMessage("insert");
-        } else {
+        }else{
             printResult.printErrorMessage("insert");
         }
+
     }
 
-
+//메뉴 수정
     public void modifyMenu(Map<String, String> parameter) {
 
         int code = Integer.parseInt(parameter.get("code"));
@@ -86,28 +74,25 @@ public class MenuController {
         menu.setPrice(price);
         menu.setCategoryCode(categoryCode);
 
-        boolean result = menuService.modifyMenu(menu);
 
-        // view로 전달
-        if (result) {
+        if(menuService.modifyMenu(menu)){
             printResult.printSuccessMessage("update");
-        } else {
+        }else{
             printResult.printErrorMessage("update");
         }
     }
 
+//메뉴 삭제
     public void deleteMenu(Map<String, String> parameter) {
+
 
         int code = Integer.parseInt(parameter.get("code"));
 
-        boolean result = menuService.deleteMenu(code);
-
-        if (result) {
+        if(menuService.deleteMenu(menu)){
             printResult.printSuccessMessage("delete");
-        } else {
+        }else{
             printResult.printErrorMessage("delete");
         }
     }
+
 }
-
-
