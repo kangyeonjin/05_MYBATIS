@@ -21,8 +21,8 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no) {
-                case 1: controller.Allemployee(); break;
-//                case 2: controller.employeeByCode(inputEmployeeCode()); break;
+                case 1: controller.allEmployee(); break;
+                case 2: controller.employeeByCode(inputEmployeeCode()); break;
 //                case 3: Controller.registemployee(inputEmployee()); break;
 //                case 4: Controller.modifyEmployee(inputModifyEmployee()); break;
 //                case 5: Controller.deleteEmployee(inputEmployeeCode()); break;

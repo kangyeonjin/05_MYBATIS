@@ -10,13 +10,13 @@ import static section01.Template.getSqlSession;
 
         private Mapper Mapper;
 
-        public List<EmployeeDTO> Allemployee() {
+        public List<EmployeeDTO> allEmployee() {
 
             SqlSession sqlSession = getSqlSession();
 
             Mapper = sqlSession.getMapper(Mapper.class);
 
-            List<EmployeeDTO> employeeList = Mapper.Allemployee();
+            List<EmployeeDTO> employeeList = Mapper.allEmployee();
 
             sqlSession.close();
 
@@ -24,18 +24,18 @@ import static section01.Template.getSqlSession;
 
         }
 
-//        public EmployeeDTO employByCode(int empId) {
-//
-//            SqlSession sqlSession = getSqlSession();
-//
-//            Mapper = sqlSession.getMapper(Mapper.class);
-//
-//            EmployeeDTO employ = Mapper.employByCode(empId);
-//
-//            sqlSession.close();
-//
-//            return employ;
-//        }
+        public EmployeeDTO employByCode(int empId) {
+
+            SqlSession sqlSession = getSqlSession();
+
+            Mapper = sqlSession.getMapper(Mapper.class);
+
+            EmployeeDTO employ = Mapper.employByCode(empId);
+
+            sqlSession.close();
+
+            return employ;
+        }
 
 
 

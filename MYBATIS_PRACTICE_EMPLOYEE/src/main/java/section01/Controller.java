@@ -16,9 +16,9 @@ public class Controller {
     }
 
   //전체 조회
-    public void Allemployee(){
+    public void allEmployee(){
 
-        List<EmployeeDTO> employeeList = service.Allemployee();
+        List<EmployeeDTO> employeeList = service.allEmployee();
 
         if(employeeList != null){
             printResult.printEmployList(employeeList);
@@ -27,19 +27,19 @@ public class Controller {
         }
     }
 
-    // 코드 조회
-//    public void employeeByCode(Map<String, String> parameter) {
-//
-//        int empId = Integer.parseInt(parameter.get("empId"));
-//
-//        EmployeeDTO employ = Service.employByCode(empId);
-//
-//        if(employ != null) {
-//            printResult.printEmployee(employ);
-//        } else {
-//            printResult.printErrorMessage("selectOne");
-//        }
-//    }
+//     코드 조회
+    public void employeeByCode(Map<String, String> parameter) {
+
+        int empId = Integer.parseInt(parameter.get("empId"));
+
+        EmployeeDTO employ = Service.employByCode(empId);
+
+        if(employ != null) {
+            printResult.printEmployee(employ);
+        } else {
+            printResult.printErrorMessage("selectOne");
+        }
+    }
 
 //    public void registemployee(){
 //

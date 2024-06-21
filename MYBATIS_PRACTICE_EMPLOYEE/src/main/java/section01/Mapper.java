@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface Mapper {
 
-    List<EmployeeDTO> Allemployee();
+    List<EmployeeDTO> allEmployee();
 
-//    EmployeeDTO employByCode(int empId);
+    EmployeeDTO employByCode(int empId);
 
 //    int insertMenu(MenuDTO menu);
 //
