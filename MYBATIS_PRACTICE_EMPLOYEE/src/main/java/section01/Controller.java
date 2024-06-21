@@ -30,9 +30,9 @@ public class Controller {
 //     코드 조회
     public void employeeByCode(Map<String, String> parameter) {
 
-        int empId = Integer.parseInt(parameter.get("empId"));
+        int empId = Integer.parseInt(parameter.get("empId")); //형변환
 
-        EmployeeDTO employ = Service.employByCode(empId);
+        EmployeeDTO employ = service.employByCode(empId);
 
         if(employ != null) {
             printResult.printEmployee(employ);
@@ -41,12 +41,20 @@ public class Controller {
         }
     }
 
-//    public void registemployee(){
-//
-//
-//    }
-//
-//
+    public void registemployee(Map<String, String> parameter){
+
+        int empNo = Integer.parseInt(parameter.get("empNo"));
+
+        EmployeeDTO employ = service.employByCode(empNo);
+
+        if(employ != null) {
+            printResult.printEmployee(employ);
+        } else {
+            printResult.printErrorMessage("selectOne");
+        }
+
+    }
+
 //    public void modifyEmployee(){
 //
 //

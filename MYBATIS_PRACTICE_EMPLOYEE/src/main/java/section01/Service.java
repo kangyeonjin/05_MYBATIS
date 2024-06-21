@@ -38,6 +38,20 @@ import static section01.Template.getSqlSession;
         }
 
 
+        public EmployeeDTO registemployee(int empNo) {
+
+            SqlSession sqlSession = getSqlSession();
+
+            Mapper = sqlSession.getMapper(Mapper.class);
+
+            EmployeeDTO employ = Mapper.employByCode(empNo);
+
+            sqlSession.close();
+
+            return employ;
+        }
+
+
 
 
 }

@@ -42,6 +42,52 @@
         *
         from
         employee
+
     </select>
+
+    <select id ="employByCode" resultMap ="employResultMap">
+
+        select emp_id
+        from  employee
+        where emp_id = #{ empId }
+
+    </select>
+
+    <select id ="insertEmployee" resultMap ="section01.EmployeeDTO">
+
+        insert into employee (
+            emp_id,
+            emp_name,
+            emp_no,
+            email,
+            phone,
+            dept_code,
+            job_code,
+            sal_level,
+            salary,
+            bonus,
+            manager_id,
+            hire_date,
+            ent_date,
+            ent_yn
+        ) values (
+        #{ empid },
+        #{ empname },
+        #{ empno },
+        #{ email },
+        #{ phone },
+        #{ deptcode },
+        #{ jobcode },
+        #{ sallevel },
+        #{ salary },
+        #{ bonus },
+        #{ managerid },
+        #{ hiredate },
+        #{ entdate },
+        #{ entyn }
+        )
+
+    </select>
+
 
 </mapper>
