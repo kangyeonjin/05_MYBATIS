@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.section01.xml.DynamicSqlMapper">
+    <resultMap id="menuResultMap" type="com.ohgiraffers.common.MenuDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="category" column="category_code"/>
+        <result property="orderableStatus" column="orderable_status"/>
+
+    </resultMap>
+
+    <select id="selectMenuByPrice" parameterType="hashmap" resultMap="menuResultMap">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_status,
+        a.orderable_status
+        from tbl_menu a
+        where a.orderable_status ='Y'
+        <if test="price gte 0 and price lte 10000">
+        <![CDATA[
+        and a.menu_price < #{price}]]>
+        </if>
+    </select>
+
+
+
+</mapper>

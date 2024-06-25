@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.section01.xmlmapper.ElementTestMapper">
+
+    <cache eviction="LRU" flushInterval="1000" size="512" readOnly="true"/>
+
+    <select id="selectCacheTest" resultType="java.lang.String">
+        select
+        menu_name
+        from
+        tbl_menu
+    </select>
+
+    <resultMap id="menuResultMap1" type="com.ohgiraffers.common.MenuDTO" autoMapping="false">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="categoryCode" column="category_code"/>
+    </resultMap>
+
+    <resultMap id="menuResultMap2" type="com.ohgiraffers.common.MenuDTO" extends="menuResultMap1">
+        <!-- extends로 menuResultMap1을 확장했으므로 추가하고 싶은것만 추가하면 된다. -->
+        <result property="orderableStatus" column="orderable_status"/>
+    </resultMap>
+
+    <select id="selectResultMapTest" resultMap="menuResultMap2">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_code,
+        a.orderable_status
+        from tbl_menu a
+        where a.orderable_status = 'Y'
+    </select>
+
+    <!-- <constructor> -->
+    <resultMap id="menuResultMap3" type="com.ohgiraffers.common.MenuDTO">
+        <constructor>
+            <idArg column="menu_code" javaType="_int"/>
+            <arg column="menu_name" javaType="string"/>
+            <arg column="menu_price" javaType="_int"/>
+            <arg column="category_code" javaType="_int"/>
+            <arg column="orderable_status" javaType="string"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectResultMapConstructorTest" resultMap="menuResultMap3">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_code,
+        a.orderable_status
+        from tbl_menu a
+        where a.orderable_status = 'Y'
+    </select>
+
+    <resultMap id="menuAndCategoryResultMap" type="com.ohgiraffers.common.MenuAndCategoryDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="orderableStatus" column="orderable_status"/>
+        <association property="category" javaType="com.ohgiraffers.common.CategoryDTO">
+            <id property="code" column="category_code"/>
+            <result property="name" column="category_name"/>
+            <result property="refCategoryCode" column="ref_category_code"/>
+        </association>
+    </resultMap>
+
+
+    <select id="selectResultMapAssociationTest" resultMap="menuAndCategoryResultMap">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        b.category_code,
+        b.category_name,
+        b.ref_category_code,
+        a.orderable_status
+        from tbl_menu a
+        join tbl_category b on (a.category_code = b.category_code)
+        where a.orderable_status = 'Y'
+    </select>
+
+    <resultMap id="categoryAndMenuResultMap" type="com.ohgiraffers.common.CategoryAndMenuDTO">
+        <id property="code" column="category_code"/>
+        <result property="name" column="category_name"/>
+        <result property="refCategoryCode" column="ref_category_code"/>
+        <collection property="menuList" ofType="com.ohgiraffers.common.MenuDTO">
+            <id property="code" column="menu_code"/>
+            <result property="name" column="menu_name"/>
+            <result property="price" column="menu_price"/>
+            <result property="categoryCode" column="category_code"/>
+            <result property="orderableStatus" column="orderable_status"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectResultMapCollectionTest" resultMap="categoryAndMenuResultMap">
+        select
+        a.category_code,
+        a.category_name,
+        a.ref_category_code,
+        b.menu_code,
+        b.menu_name,
+        b.menu_price,
+        b.category_code,
+        b.orderable_status
+        from tbl_category a
+        left join tbl_menu b on (a.category_code = b.category_code)
+        where b.orderable_status = 'Y'
+        order by a.category_code
+    </select>
+
+
+</mapper>
